@@ -11,21 +11,23 @@
   <button id="music-toggle" class="music-toggle" onclick="toggleMusic()" aria-label="Couper la musique">🔊</button>
 
   <div class="card">
-    <span class="badge"><span class="dot"></span>ÉPREUVE 2/7 — ENCODAGE</span>
+    <span class="badge"><span class="dot"></span>ÉPREUVE 2/8 — SCAN</span>
     <div class="progress">
-      <i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i>
+      <i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i>
     </div>
-    <h2>Fichier corrompu</h2>
-    <p>Ce fragment traîne dans les logs du serveur étudiant. Il ressemble à du Base64.</p>
-    <div class="panel">VkFJUw==</div>
+    <h2>Code retrouvé</h2>
+    <p>Ce QR code était collé au dos d'une affiche. Scanne-le avec l'appareil photo de ton téléphone.</p>
+    <div class="qr-wrap">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=COEURS" alt="QR code">
+    </div>
     <input type="text" id="ans" placeholder="Ta réponse (un mot)">
     <button onclick="submitAnswer()">Valider</button>
     <div class="feedback" id="fb"></div>
-    <details class="hint"><summary>👁️ Afficher l'indice</summary><p>Indice : un décodeur Base64 en ligne fait le travail en 2 secondes.</p></details>
+    <details class="hint"><summary>👁️ Afficher l'indice</summary><p>Indice : pas de scanner sous la main ? Fais un clic droit → « ouvrir l'image » et zoome, certaines apps décodent depuis une capture d'écran.</p></details>
   </div>
   <script src="script.js"></script>
   <script>
-    function submitAnswer(){ checkAnswer("ans","fb",["VAIS"],"enigme3.html","Énigme 2 réussie (Base64)"); }
+    function submitAnswer(){ checkAnswer("ans","fb",["COEURS","CŒURS"],"enigme3.html","Énigme 2 réussie (QR code)"); }
     bindEnter("ans", submitAnswer);
   </script>
 </body>

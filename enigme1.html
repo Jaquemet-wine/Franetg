@@ -11,13 +11,13 @@
   <button id="music-toggle" class="music-toggle" onclick="toggleMusic()" aria-label="Couper la musique">🔊</button>
 
   <div class="card">
-    <span class="badge"><span class="dot"></span>ÉPREUVE 1/7 — MORSE</span>
+    <span class="badge"><span class="dot"></span>ÉPREUVE 1/8 — MORSE</span>
     <div class="progress">
-      <i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
     </div>
     <h2>Signal capté</h2>
     <p>Un vieux poste de radio étudiant émet ceci en boucle. Décode le message.</p>
-    <div class="panel">.--- .</div>
+    <div class="panel">-.. . ..- -..-</div>
     <input type="text" id="ans" placeholder="Ta réponse (un mot)">
     <button onclick="submitAnswer()">Valider</button>
     <div class="feedback" id="fb"></div>
@@ -25,7 +25,7 @@
   </div>
   <script src="script.js"></script>
   <script>
-    function submitAnswer(){ checkAnswer("ans","fb",["JE"],"enigme2.html","Énigme 1 réussie (Morse)"); }
+    function submitAnswer(){ checkAnswer("ans","fb",["DEUX"],"enigme2.html","Énigme 1 réussie (Morse)"); }
     bindEnter("ans", submitAnswer);
   </script>
 </body>

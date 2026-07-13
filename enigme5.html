@@ -11,21 +11,21 @@
   <button id="music-toggle" class="music-toggle" onclick="toggleMusic()" aria-label="Couper la musique">🔊</button>
 
   <div class="card">
-    <span class="badge"><span class="dot"></span>ÉPREUVE 5/7 — LETTRES</span>
+    <span class="badge"><span class="dot"></span>ÉPREUVE 5/8 — NUMÉRIQUE</span>
     <div class="progress">
-      <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i>
+      <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i>
     </div>
-    <h2>Lettres éparpillées</h2>
-    <p>Remets ces lettres dans l'ordre pour former un petit mot.</p>
-    <div class="panel" style="font-size:22px;">E · V · C · A</div>
+    <h2>Suite de nombres</h2>
+    <p>Griffonnée au dos d'un cahier. Chaque nombre correspond à la position d'une lettre dans l'alphabet (A=1, B=2, C=3…).</p>
+    <div class="panel">14 – 15 – 21 – 19</div>
     <input type="text" id="ans" placeholder="Ta réponse (un mot)">
     <button onclick="submitAnswer()">Valider</button>
     <div class="feedback" id="fb"></div>
-    <details class="hint"><summary>👁️ Afficher l'indice</summary><p>Indice : 4 lettres, un petit mot très courant.</p></details>
+    <details class="hint"><summary>👁️ Afficher l'indice</summary><p>Indice : 14 = la 14e lettre de l'alphabet. Fais de même pour chaque nombre.</p></details>
   </div>
   <script src="script.js"></script>
   <script>
-    function submitAnswer(){ checkAnswer("ans","fb",["AVEC"],"enigme6.html","Énigme 5 réussie (Anagramme)"); }
+    function submitAnswer(){ checkAnswer("ans","fb",["NOUS"],"enigme6.html","Énigme 5 réussie (Numérique A1Z26)"); }
     bindEnter("ans", submitAnswer);
   </script>
 </body>

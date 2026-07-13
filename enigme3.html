@@ -11,21 +11,21 @@
   <button id="music-toggle" class="music-toggle" onclick="toggleMusic()" aria-label="Couper la musique">🔊</button>
 
   <div class="card">
-    <span class="badge"><span class="dot"></span>ÉPREUVE 3/7 — CHIFFREMENT</span>
+    <span class="badge"><span class="dot"></span>ÉPREUVE 3/8 — CHIFFREMENT</span>
     <div class="progress">
-      <i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i>
+      <i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i>
     </div>
     <h2>Message décalé</h2>
     <p>Chaque lettre de ce mot a été décalée de 3 rangs vers l'avant dans l'alphabet (un chiffre de César).</p>
-    <div class="panel">PH</div>
+    <div class="panel">XQH</div>
     <input type="text" id="ans" placeholder="Ta réponse (un petit mot)">
     <button onclick="submitAnswer()">Valider</button>
     <div class="feedback" id="fb"></div>
-    <details class="hint"><summary>👁️ Afficher l'indice</summary><p>Indice : décale chaque lettre de 3 rangs en arrière (A→X, B→Y…). P devient M.</p></details>
+    <details class="hint"><summary>👁️ Afficher l'indice</summary><p>Indice : décale chaque lettre de 3 rangs en arrière (A→X, B→Y…). X devient U.</p></details>
   </div>
   <script src="script.js"></script>
   <script>
-    function submitAnswer(){ checkAnswer("ans","fb",["ME"],"enigme4.html","Énigme 3 réussie (César)"); }
+    function submitAnswer(){ checkAnswer("ans","fb",["UNE"],"enigme4.html","Énigme 3 réussie (César)"); }
     bindEnter("ans", submitAnswer);
   </script>
 </body>

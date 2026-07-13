@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Défi — Épreuve 8</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
+  <button id="music-toggle" class="music-toggle" onclick="toggleMusic()" aria-label="Couper la musique">🔊</button>
+
+  <div class="card">
+    <span class="badge"><span class="dot"></span>ÉPREUVE 8/8 — REBUS</span>
+    <div class="progress">
+      <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i>
+    </div>
+    <h2>Le dernier mot</h2>
+    <p>Trois dessins, trois sons, un seul mot à la fin.</p>
+
+    <div class="panel" style="padding:16px 10px;">
+      <img src="rebus.png" alt="Rébus" style="width:100%; height:auto; border-radius:8px;">
+    </div>
+
+    <input type="text" id="ans" placeholder="Ta réponse (un verbe)">
+    <button onclick="submitAnswer()">Valider</button>
+    <div class="feedback" id="fb"></div>
+    <details class="hint"><summary>👁️ Afficher l'indice</summary><p>Indice : une fille, l'anse d'un panier, et la lettre R. Colle les sons : FI + ANCE + R.</p></details>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    function submitAnswer(){ checkAnswer("ans","fb",["FIANCER"],"final.html","Énigme 8 réussie (Rébus) — DÉFI TERMINÉ"); }
+    bindEnter("ans", submitAnswer);
+  </script>
+</body>
+</html>
