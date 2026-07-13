@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Défi — Épreuve 5</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
+  <button id="music-toggle" class="music-toggle" onclick="toggleMusic()" aria-label="Couper la musique">🔊</button>
+
+  <div class="card">
+    <span class="badge"><span class="dot"></span>ÉPREUVE 5/7 — LETTRES</span>
+    <div class="progress">
+      <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i>
+    </div>
+    <h2>Lettres éparpillées</h2>
+    <p>Remets ces lettres dans l'ordre pour former un petit mot.</p>
+    <div class="panel" style="font-size:22px;">E · V · C · A</div>
+    <input type="text" id="ans" placeholder="Ta réponse (un mot)">
+    <button onclick="submitAnswer()">Valider</button>
+    <div class="feedback" id="fb"></div>
+    <details class="hint"><summary>👁️ Afficher l'indice</summary><p>Indice : 4 lettres, un petit mot très courant.</p></details>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    function submitAnswer(){ checkAnswer("ans","fb",["AVEC"],"enigme6.html","Énigme 5 réussie (Anagramme)"); }
+    bindEnter("ans", submitAnswer);
+  </script>
+</body>
+</html>

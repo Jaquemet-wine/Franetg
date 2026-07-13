@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Défi des étudiants</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
+  <button id="music-toggle" class="music-toggle" onclick="toggleMusic()" aria-label="Couper la musique">🔊</button>
+
+  <div class="card">
+    <span class="badge"><span class="dot"></span>DÉFI — NIVEAU 0/7</span>
+
+    <svg class="intro-icon" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="18" y="32" width="36" height="28" rx="4" stroke="#7C9CFF" stroke-width="3"/>
+      <path d="M24 32V22a12 12 0 0 1 24 0v4" stroke="#7C9CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="36" cy="44" r="4" fill="#7C9CFF"/>
+      <path d="M36 48v6" stroke="#7C9CFF" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+
+    <h1>Le Défi des étudiants</h1>
+    <p class="lead">Sept épreuves. Chiffrement, logique, observation.</p>
+    <p>Chaque énigme te donne un mot. Résous-les toutes dans l'ordre pour révéler la phrase finale. Certaines paraissent évidentes, d'autres demandent de vraiment chercher — un indice reste disponible derrière l'icône 👁️ si tu bloques trop longtemps.</p>
+    <p>Pas de compte à créer, pas de limite de temps, tu peux t'arrêter et reprendre plus tard depuis le même lien. La plupart abandonnent avant la fin — à toi de voir si tu en fais partie.</p>
+
+    <input type="text" id="prenom" placeholder="Prénom">
+    <input type="text" id="nom" placeholder="Nom" style="margin-top:10px;">
+    <button onclick="startChallenge()">Commencer le défi →</button>
+    <div class="feedback" id="fb"></div>
+
+    <p class="footer-note">Ton nom sert uniquement à savoir qui a relevé le défi jusqu'au bout — rien d'autre.</p>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function startChallenge(){
+      const prenom = document.getElementById("prenom").value.trim();
+      const nom = document.getElementById("nom").value.trim();
+      const fb = document.getElementById("fb");
+      if (!prenom || !nom) {
+        fb.textContent = "Merci de renseigner ton prénom et ton nom.";
+        fb.className = "feedback err";
+        return;
+      }
+      localStorage.setItem("defi_name", prenom + " " + nom);
+      recordStep("Début du défi");
+      window.location.href = "enigme1.html";
+    }
+    bindEnter("nom", startChallenge);
+  </script>
+</body>
+</html>

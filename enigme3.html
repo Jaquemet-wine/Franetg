@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Défi — Épreuve 3</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
+  <button id="music-toggle" class="music-toggle" onclick="toggleMusic()" aria-label="Couper la musique">🔊</button>
+
+  <div class="card">
+    <span class="badge"><span class="dot"></span>ÉPREUVE 3/7 — CHIFFREMENT</span>
+    <div class="progress">
+      <i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i>
+    </div>
+    <h2>Message décalé</h2>
+    <p>Chaque lettre de ce mot a été décalée de 3 rangs vers l'avant dans l'alphabet (un chiffre de César).</p>
+    <div class="panel">PH</div>
+    <input type="text" id="ans" placeholder="Ta réponse (un petit mot)">
+    <button onclick="submitAnswer()">Valider</button>
+    <div class="feedback" id="fb"></div>
+    <details class="hint"><summary>👁️ Afficher l'indice</summary><p>Indice : décale chaque lettre de 3 rangs en arrière (A→X, B→Y…). P devient M.</p></details>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    function submitAnswer(){ checkAnswer("ans","fb",["ME"],"enigme4.html","Énigme 3 réussie (César)"); }
+    bindEnter("ans", submitAnswer);
+  </script>
+</body>
+</html>

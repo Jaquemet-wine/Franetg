@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Défi — Épreuve 4</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
+  <button id="music-toggle" class="music-toggle" onclick="toggleMusic()" aria-label="Couper la musique">🔊</button>
+
+  <div class="card">
+    <span class="badge"><span class="dot"></span>ÉPREUVE 4/7 — POÈME</span>
+    <div class="progress">
+      <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i>
+    </div>
+    <h2>Un poème anonyme</h2>
+    <p>Épinglé sur le panneau d'affichage. Un mot se cache à travers ce poème.</p>
+    <div class="panel" style="text-align:left; font-family:'IBM Plex Sans',sans-serif; letter-spacing:normal; font-style:italic;">
+      Face à ce jour qui approche à grands pas<br>
+      Il est temps de lever le voile<br>
+      Après tant de mois passés en silence<br>
+      Nul besoin de mots pour deviner l'évidence<br>
+      Ce secret ne tiendra plus longtemps<br>
+      En chacun grandissait la même certitude<br>
+      Restait juste à choisir le bon jour
+    </div>
+    <input type="text" id="ans" placeholder="Ta réponse (un verbe)">
+    <button onclick="submitAnswer()">Valider</button>
+    <div class="feedback" id="fb"></div>
+    <details class="hint"><summary>👁️ Afficher l'indice</summary><p>Indice : regarde la première lettre de chaque ligne, dans l'ordre.</p></details>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    function submitAnswer(){ checkAnswer("ans","fb",["FIANCER"],"enigme5.html","Énigme 4 réussie (Acrostiche)"); }
+    bindEnter("ans", submitAnswer);
+  </script>
+</body>
+</html>

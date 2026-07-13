@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bravo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="final-mode">
+  <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
+  <button id="music-toggle" class="music-toggle" onclick="toggleMusic()" aria-label="Couper la musique">🔊</button>
+
+  <div class="card">
+    <div class="seal">❤</div>
+    <h1>Tu es arrivé au bout.</h1>
+    <p class="reveal">Je vais me fiancer avec Geneviève Renoult.</p>
+    <div class="photo-frame">
+      <img src="photo.jpg" alt="François et Geneviève" onerror="this.parentElement.style.display='none'">
+    </div>
+    <p class="small">En vous remerciant par avance pour vos prières...</p>
+    <p class="small" style="margin-top:14px;">Merci d'avoir gardé cela secret avant la date de l'officialisation !</p>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    launchPetals();
+    sendSummary(true);
+  </script>
+</body>
+</html>

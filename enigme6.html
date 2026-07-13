@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Défi — Épreuve 6</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
+  <button id="music-toggle" class="music-toggle" onclick="toggleMusic()" aria-label="Couper la musique">🔊</button>
+
+  <div class="card">
+    <span class="badge"><span class="dot"></span>ÉPREUVE 6/7 — OBSERVATION</span>
+    <div class="progress">
+      <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i>
+    </div>
+    <h2>Un texte trop simple</h2>
+    <p>Cette note semble vide de sens. Pourtant, quelque chose s'y cache — littéralement.</p>
+    <div class="panel" style="text-align:left; font-family:'IBM Plex Sans',sans-serif; letter-spacing:normal;">
+      Merci d'avoir tenu bon jusqu'ici. Un prénom se cache juste ici : <span class="hidden-word">GENEVIEVE</span> — il ne reste presque plus rien à trouver, courage.
+    </div>
+    <input type="text" id="ans" placeholder="Ta réponse (un prénom)">
+    <button onclick="submitAnswer()">Valider</button>
+    <div class="feedback" id="fb"></div>
+    <details class="hint"><summary>👁️ Afficher l'indice</summary><p>Indice : sélectionne tout le texte du cadre ci-dessus (glisser le doigt, ou Ctrl+A / Cmd+A) pour révéler ce qui est invisible.</p></details>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    function submitAnswer(){ checkAnswer("ans","fb",["GENEVIEVE","GENEVIÈVE"],"enigme7.html","Énigme 6 réussie (Texte caché)"); }
+    bindEnter("ans", submitAnswer);
+  </script>
+</body>
+</html>

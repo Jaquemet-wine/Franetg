@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Défi — Épreuve 7</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
+  <button id="music-toggle" class="music-toggle" onclick="toggleMusic()" aria-label="Couper la musique">🔊</button>
+
+  <div class="card">
+    <span class="badge"><span class="dot"></span>ÉPREUVE 7/7 — SCAN</span>
+    <div class="progress">
+      <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i>
+    </div>
+    <h2>Dernier code retrouvé</h2>
+    <p>Ce QR code était collé au dos d'une affiche. Scanne-le avec l'appareil photo de ton téléphone — c'est un nom de famille.</p>
+    <div class="qr-wrap">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=RENOULT" alt="QR code">
+    </div>
+    <input type="text" id="ans" placeholder="Ta réponse (un nom de famille)">
+    <button onclick="submitAnswer()">Valider</button>
+    <div class="feedback" id="fb"></div>
+    <details class="hint"><summary>👁️ Afficher l'indice</summary><p>Indice : pas de scanner sous la main ? Fais un clic droit → « ouvrir l'image » et zoome, certaines apps décodent depuis une capture d'écran.</p></details>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    function submitAnswer(){ checkAnswer("ans","fb",["RENOULT"],"final.html","Énigme 7 réussie (QR code) — DÉFI TERMINÉ"); }
+    bindEnter("ans", submitAnswer);
+  </script>
+</body>
+</html>
