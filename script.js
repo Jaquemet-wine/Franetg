@@ -37,6 +37,27 @@ function bindEnter(inputId, cb) {
 // ---------- Suivi Formspree : un seul mail récapitulatif par visite ----------
 const FORM_URL = "https://formspree.io/f/xlgqenvd";
 
+// ---------- Suivi Google Sheets (via Google Form, pour avoir un vrai tableau) ----------
+const GFORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScA2nBFq-f2HAmVQ6GmX-sQWzhxEgEIAEGnNyAAMcm0uRp9MQ/formResponse";
+const GFORM_ENTRY_NOM = "entry.17519945";
+const GFORM_ENTRY_ETAPE = "entry.1150367304";
+const GFORM_ENTRY_STATUT = "entry.1220377202";
+const GFORM_ENTRY_TEMPS = "entry.1613330343";
+
+function submitToGoogleForm(nom, etape, statut, temps) {
+  const body = new URLSearchParams();
+  body.append(GFORM_ENTRY_NOM, nom);
+  body.append(GFORM_ENTRY_ETAPE, etape);
+  body.append(GFORM_ENTRY_STATUT, statut);
+  body.append(GFORM_ENTRY_TEMPS, temps);
+  fetch(GFORM_URL, {
+    method: "POST",
+    mode: "no-cors", // Google Forms ne renvoie pas de CORS, réponse illisible mais l'envoi fonctionne
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: body.toString()
+  }).catch(() => {});
+}
+
 // Enregistre localement une étape franchie (sans envoyer de mail immédiatement)
 function recordStep(step) {
   const steps = JSON.parse(localStorage.getItem("defi_steps") || "[]");
@@ -56,9 +77,19 @@ function sendSummary(finished) {
   if (sessionStorage.getItem("defi_last_sent") === signature) return; // déjà envoyé pour cette progression
   sessionStorage.setItem("defi_last_sent", signature);
 
+  const startTime = parseInt(localStorage.getItem("defi_start_time") || "0", 10);
+  let dureeTexte = "non disponible";
+  if (startTime) {
+    const elapsedSec = Math.round((Date.now() - startTime) / 1000);
+    const min = Math.floor(elapsedSec / 60);
+    const sec = elapsedSec % 60;
+    dureeTexte = min > 0 ? `${min} min ${sec.toString().padStart(2,"0")} s` : `${sec} s`;
+  }
+
   const summary =
     "Énigmes réussies :\n- " + steps.join("\n- ") +
-    "\n\nArrivé jusqu'au bout : " + (finished ? "OUI 🎉" : "Non (abandon ou en cours)");
+    "\n\nArrivé jusqu'au bout : " + (finished ? "OUI 🎉" : "Non (abandon ou en cours)") +
+    "\nTemps écoulé depuis l'ouverture du lien : " + dureeTexte;
 
   const data = new FormData();
   data.append("nom", name);
@@ -70,6 +101,10 @@ function sendSummary(finished) {
   } else {
     fetch(FORM_URL, { method: "POST", body: data, keepalive: true }).catch(() => {});
   }
+
+  // 4 colonnes séparées pour le tableau Google Sheets
+  const statut = finished ? "VALIDÉ EN ENTIER" : "EN COURS";
+  submitToGoogleForm(name, steps[steps.length - 1], statut, dureeTexte);
 }
 
 // Envoie automatiquement le récap quand la personne quitte une page (nouvelle progression uniquement)

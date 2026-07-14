@@ -45,6 +45,7 @@
         return;
       }
       localStorage.setItem("defi_name", prenom + " " + nom);
+      localStorage.setItem("defi_start_time", Date.now());
       recordStep("Début du défi");
       window.location.href = "enigme1.html";
     }
