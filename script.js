@@ -43,13 +43,17 @@ const GFORM_ENTRY_NOM = "entry.17519945";
 const GFORM_ENTRY_ETAPE = "entry.1150367304";
 const GFORM_ENTRY_STATUT = "entry.1220377202";
 const GFORM_ENTRY_TEMPS = "entry.1613330343";
+const GFORM_ENTRY_INDICES = "entry.653109299";
 
-function submitToGoogleForm(nom, etape, statut, temps) {
+function submitToGoogleForm(nom, etape, statut, temps, indices) {
   const body = new URLSearchParams();
   body.append(GFORM_ENTRY_NOM, nom);
   body.append(GFORM_ENTRY_ETAPE, etape);
   body.append(GFORM_ENTRY_STATUT, statut);
   body.append(GFORM_ENTRY_TEMPS, temps);
+  if (GFORM_ENTRY_INDICES && !GFORM_ENTRY_INDICES.includes("XXXXXXX")) {
+    body.append(GFORM_ENTRY_INDICES, indices);
+  }
   fetch(GFORM_URL, {
     method: "POST",
     mode: "no-cors", // Google Forms ne renvoie pas de CORS, réponse illisible mais l'envoi fonctionne
@@ -66,6 +70,41 @@ function recordStep(step) {
     localStorage.setItem("defi_steps", JSON.stringify(steps));
   }
 }
+
+// ---------- Suivi de la page actuelle (pour savoir où une personne est bloquée) ----------
+function currentPageLabel() {
+  const path = window.location.pathname;
+  const match = path.match(/enigme(\d+)\.html/);
+  if (match) return "Énigme " + match[1];
+  if (path.includes("final.html")) return "Page finale";
+  return "Page d'accueil";
+}
+
+function trackCurrentPage() {
+  localStorage.setItem("defi_current_page", currentPageLabel());
+}
+
+// ---------- Suivi des indices consultés ----------
+function trackHintOpening() {
+  const hintEl = document.querySelector("details.hint");
+  if (!hintEl) return;
+  const match = window.location.pathname.match(/enigme(\d+)\.html/);
+  if (!match) return;
+  const stepNum = match[1];
+  hintEl.addEventListener("toggle", () => {
+    if (!hintEl.open) return;
+    const hints = JSON.parse(localStorage.getItem("defi_hints") || "[]");
+    if (!hints.includes(stepNum)) {
+      hints.push(stepNum);
+      localStorage.setItem("defi_hints", JSON.stringify(hints));
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  trackCurrentPage();
+  trackHintOpening();
+});
 
 // Envoie le récapitulatif complet (une seule fois par progression atteinte)
 function sendSummary(finished) {
@@ -102,9 +141,12 @@ function sendSummary(finished) {
     fetch(FORM_URL, { method: "POST", body: data, keepalive: true }).catch(() => {});
   }
 
-  // 4 colonnes séparées pour le tableau Google Sheets
+  // Colonnes séparées pour le tableau Google Sheets
   const statut = finished ? "VALIDÉ EN ENTIER" : "EN COURS";
-  submitToGoogleForm(name, steps[steps.length - 1], statut, dureeTexte);
+  const etape = localStorage.getItem("defi_current_page") || steps[steps.length - 1];
+  const hints = JSON.parse(localStorage.getItem("defi_hints") || "[]");
+  const hintsTexte = hints.length ? hints.join(", ") : "Aucun";
+  submitToGoogleForm(name, etape, statut, dureeTexte, hintsTexte);
 }
 
 // Envoie automatiquement le récap quand la personne quitte une page (nouvelle progression uniquement)
